@@ -11,7 +11,8 @@ RUN apt-get update -y && \
     apt-get install -y unzip && \
     apt-get install -y git && \
     apt-get install -y curl && \
-    apt-get install -y vim
+    apt-get install -y vim && \
+    apt-get install -y sudo
 
 
 RUN apt-get update -y && \
@@ -51,8 +52,7 @@ ENV DISPLAY_WIDTH=1280 \
 COPY etc/ /etc/
 
 
-RUN apt-get install -y sudo \
-    && useradd -m app && usermod -aG sudo app && echo 'app ALL=(ALL) NOPASSWD:ALL' >> //etc/sudoers
+RUN useradd -m app && usermod -aG sudo app && echo 'app ALL=(ALL) NOPASSWD:ALL' >> //etc/sudoers
 
 USER app
 WORKDIR /home/app
