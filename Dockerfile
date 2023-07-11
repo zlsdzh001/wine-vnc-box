@@ -57,13 +57,14 @@ RUN useradd -m app && usermod -aG sudo app && echo 'app ALL=(ALL) NOPASSWD:ALL' 
 USER app
 WORKDIR /home/app
 
-COPY setup/ /setup/
+COPY setup /home/app/setup
 
 RUN bash -c 'sudo -E supervisord -c /etc/supervisord.conf -l /var/log/supervisord.log &' && \
     sleep 5 && \
-    cd /setup && \
+    sudo chown -R app:app /home/app/setup &&  \
+    cd /home/app/setup && \
     ./install.sh && \
-    sudo rm -rf /setup
+    sudo rm -rf /home/app/setup 
 
 
 COPY entrypoint.sh /entrypoint.sh
