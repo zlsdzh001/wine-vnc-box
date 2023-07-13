@@ -16,7 +16,7 @@ wine-vnc-box：Docker镜像，集成了Wine和VNC，可用于运行Windows程序
 ```
 
 # 必要的步骤，启动桌面环境
-/entrypoint.sh &
+exec sudo -E bash -c 'supervisord -c /etc/supervisord.conf -l /var/log/supervisord.log' &
 
 wine /home/app/my-app.exe
 ```
