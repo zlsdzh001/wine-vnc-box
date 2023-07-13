@@ -46,4 +46,4 @@ docker build -t my-wine-app .
 docker run -p 8080:8080 my-wine-app
 ```
 
-现在，你可以使用浏览器访问localhost:5900，来远程访问和控制你的Windows程序。
+现在，你可以使用浏览器访问localhost:8080，来远程访问和控制你的Windows程序。
