@@ -38,7 +38,7 @@ RUN dpkg --add-architecture i386 && \
     apt-key add winehq.key && \
     apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
     apt-get update -y && \
-    apt-get install -y winehq-stable_8.0.2
+    apt-get install -y winehq-stable=8.0.2
 
 ENV DISPLAY_WIDTH=1280 \
     DISPLAY_HEIGHT=720 \
