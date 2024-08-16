@@ -32,20 +32,13 @@ RUN apt-get install -y ttf-wqy-microhei locales procps \
     && locale-gen
 
 # 安装 wine
-# RUN dpkg --add-architecture i386 && \
-#     apt-get full-upgrade -y && \
-#     wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
-#     apt-key add winehq.key && \
-#     apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
-#     apt-get update -y && \
-#     apt-get install -y winehq-stable=8.0.2~focal-1
-RUN dpkg --add-architecture i386
-RUN apt-get update -y && apt-get full-upgrade -y
-RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key
-RUN gpg --no-default-keyring --keyring /usr/share/keyrings/winehq-archive.keyring.gpg --import winehq.key
-RUN echo "deb [signed-by=/usr/share/keyrings/winehq-archive.keyring.gpg] https://dl.winehq.org/wine-builds/ubuntu/ focal main" | tee /etc/apt/sources.list.d/winehq.list > /dev/null
-RUN apt-get update -y
-RUN apt-get install -y --install-recommends winehq-stable
+RUN dpkg --add-architecture i386 && \
+    apt-get full-upgrade -y && \
+    wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
+    apt-key add winehq.key && \
+    apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
+    apt-get update -y && \
+    apt-get install -y --install-recommends winehq-stable
 
 ENV DISPLAY_WIDTH=1280 \
     DISPLAY_HEIGHT=720 \
