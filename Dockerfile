@@ -45,6 +45,7 @@ RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key
 RUN gpg --no-default-keyring --keyring /usr/share/keyrings/winehq-archive.keyring.gpg --import winehq.key
 RUN echo "deb [signed-by=/usr/share/keyrings/winehq-archive.keyring.gpg] https://dl.winehq.org/wine-builds/ubuntu/ focal main" | tee /etc/apt/sources.list.d/winehq.list > /dev/null
 RUN apt-get update -y
+RUN apt search wine -y
 RUN apt-get install -y --install-recommends winehq-stable=8.0.2~focal-1
 
 ENV DISPLAY_WIDTH=1280 \
