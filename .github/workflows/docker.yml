@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  DOCKERHUB_REPO: furacas/wine-vnc-box
+  DOCKERHUB_REPO: zlsdzh001/wine-vnc-box
 
 jobs:
   main:
