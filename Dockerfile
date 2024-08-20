@@ -31,14 +31,13 @@ RUN apt-get install -y ttf-wqy-microhei locales procps \
     && sed -ie 's/# zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/g' /etc/locale.gen \
     && locale-gen
 
-# 安装 wine
-RUN dpkg --add-architecture i386 && \
-    apt-get full-upgrade -y && \
-    wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
-    apt-key add winehq.key && \
-    apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
-    apt-get update -y && \
-    apt-get install -y --install-recommends winehq-stable
+RUN  dpkg --add-architecture i386 \
+&& mkdir -pm755 /etc/apt/keyrings \
+&& wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key \
+&& wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/focal/winehq-focal.sources \
+&& apt update -y \
+&& apt install -y --install-recommends winehq-stable \
+&& apt install -y winetricks
 
 ENV DISPLAY_WIDTH=1280 \
     DISPLAY_HEIGHT=720 \
@@ -48,9 +47,7 @@ ENV DISPLAY_WIDTH=1280 \
     LC_ALL=zh_CN.UTF-8 \
     WINEPREFIX=/home/app/.wine
 
-
 COPY etc/ /etc/
-
 
 RUN useradd -m app && usermod -aG sudo app && echo 'app ALL=(ALL) NOPASSWD:ALL' >> //etc/sudoers
 
